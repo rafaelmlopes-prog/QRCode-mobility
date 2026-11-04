@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0f172a">
-    <title>Suporte e Mobilidade - Atendimento Corporativo</title>
+    <title>Central de Apoio & Mobilidade - ViaQuatro / CCR</title>
 
-    <!-- CONFIGURAÇÕES DE MANIFESTO E PWA DINÂMICO (PARA SUPORTE OFFLINE E INSTALAÇÃO) -->
+    <!-- CONFIGURAÇÕES DE MANIFESTO E PWA DINÂMICO PARA USO OFFLINE -->
     <script>
         const manifestData = {
             "name": "Central de Apoio & Mobilidade",
-            "short_name": "Apoio & Rotas",
+            "short_name": "Apoio & Mobilidade",
             "start_url": "./",
             "display": "standalone",
             "background_color": "#0f172a",
@@ -36,13 +36,17 @@
         :root {
             --primary: #0f172a;
             --accent: #2563eb;
+            --line-yellow: #eab308;
+            --line-blue: #0284c7;
+            --line-green: #16a34a;
+            --line-red: #dc2626;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #334155;
+            --text-main: #1e293b;
             --text-light: #64748b;
             --border-color: #e2e8f0;
-            --danger: #dc2626;
-            --success: #16a34a;
+            --danger: #b91c1c;
+            --danger-bg: #fef2f2;
         }
 
         * {
@@ -64,10 +68,10 @@
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 520px;
             background: var(--card-bg);
             border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             border: 1px solid var(--border-color);
             position: relative;
@@ -76,12 +80,26 @@
         header {
             background: var(--primary);
             color: white;
-            padding: 24px 20px 16px 20px;
+            padding: 24px 20px 18px 20px;
             text-align: center;
         }
 
+        .brand-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            color: #93c5fd;
+            text-transform: uppercase;
+        }
+
         header h1 {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 4px;
         }
 
@@ -91,13 +109,14 @@
         }
 
         .offline-status {
-            font-size: 0.7rem;
+            font-size: 0.725rem;
             color: #38bdf8;
-            margin-top: 6px;
+            margin-top: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 5px;
+            font-weight: 500;
         }
 
         .lang-switch {
@@ -105,24 +124,26 @@
             background: #1e293b;
             padding: 4px;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .lang-btn {
             background: transparent;
             border: none;
             color: #94a3b8;
-            padding: 6px 16px;
-            font-size: 0.8rem;
+            padding: 8px 20px;
+            font-size: 0.825rem;
             font-weight: 600;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .lang-btn.active {
             background: var(--accent);
             color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .section {
@@ -134,57 +155,124 @@
             display: block;
         }
 
-        h2 {
-            font-size: 1rem;
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
             color: var(--primary);
             margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 8px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
         }
 
         .card {
-            background: #f1f5f9;
-            border-radius: 10px;
-            padding: 14px;
-            margin-bottom: 12px;
-            border-left: 4px solid var(--accent);
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--accent);
+            transition: transform 0.1s ease;
         }
 
         .card.emergency {
             border-left-color: var(--danger);
-            background: #fef2f2;
+            background: var(--danger-bg);
+            border-color: #fecaca;
+        }
+
+        .card-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
         }
 
         .card-title {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.95rem;
             color: var(--primary);
-            margin-bottom: 4px;
+        }
+
+        .card.emergency .card-title {
+            color: var(--danger);
         }
 
         .card-desc {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 10px;
+            font-size: 0.875rem;
+            color: #475569;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            font-style: italic;
         }
 
         .audio-btn {
             background: var(--accent);
             color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.775rem;
             font-weight: 600;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+            transition: background 0.2s;
+        }
+
+        .audio-btn:hover {
+            opacity: 0.95;
         }
 
         .audio-btn.danger {
             background: var(--danger);
+            box-shadow: 0 2px 4px rgba(185, 28, 28, 0.2);
+        }
+
+        /* ESTILIZAÇÃO DE ROTAS E LINHAS DE METRÔ */
+        .route-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .route-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .line-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .bg-line-1 { background-color: var(--line-blue); }
+        .bg-line-2 { background-color: var(--line-green); }
+        .bg-line-3 { background-color: var(--line-red); }
+        .bg-line-4 { background-color: #d97706; }
+        .bg-line-13 { background-color: #059669; }
+
+        .route-destination {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
         }
 
         .step-list {
@@ -194,31 +282,47 @@
         .step-item {
             display: flex;
             gap: 12px;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             font-size: 0.85rem;
+            align-items: flex-start;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
         }
 
         .step-number {
-            background: var(--accent);
+            background: var(--primary);
             color: white;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 0.75rem;
+            font-weight: 700;
+            font-size: 0.725rem;
             flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .step-text {
+            color: #334155;
+            line-height: 1.4;
         }
 
         footer {
             text-align: center;
-            padding: 12px;
+            padding: 16px;
             font-size: 0.75rem;
             color: var(--text-light);
             background: #f8fafc;
             border-top: 1px solid var(--border-color);
+            line-height: 1.5;
+        }
+
+        footer strong {
+            color: var(--primary);
         }
     </style>
 </head>
@@ -226,97 +330,238 @@
 
 <div class="container">
     <header>
+        <div class="brand-badge">Atendimento & Protocolos</div>
         <h1 id="hdr-title">Central de Apoio & Mobilidade</h1>
-        <p id="hdr-sub">Atendimento Rápido e Direcionamento</p>
-        <div class="offline-status" id="pwa-status">⚡ Pronto para Uso Offline</div>
+        <p id="hdr-sub">Suporte Operacional e Orientação ao Passageiro</p>
+        <div class="offline-status" id="pwa-status">⚡ Sistema Ativo • Modo Offline Habilitado</div>
     </header>
 
     <div class="lang-switch">
-        <button class="lang-btn active" onclick="setLanguage('pt')">Português</button>
-        <button class="lang-btn" onclick="setLanguage('en')">English</button>
+        <button class="lang-btn active" onclick="setLanguage('pt')">Português (Colaborador)</button>
+        <button class="lang-btn" onclick="setLanguage('en')">English (Passenger)</button>
     </div>
 
-    <!-- SEÇÃO PORTUGUÊS -->
+    <!-- ==================== SEÇÃO EM PORTUGUÊS (COLABORADOR) ==================== -->
     <div id="content-pt" class="section active">
-        <h2>🚨 Apoio Imediato & Emergência</h2>
+        <div class="section-title">🚨 Protocolos de Acolhimento & Emergência</div>
         
         <div class="card emergency">
-            <div class="card-title">Acolhimento Rápido</div>
-            <div class="card-desc">"Você está segura(o). Fique comigo, posso ajudar."</div>
-            <button class="audio-btn danger" onclick="speak('You are safe. Stay with me, I can help you.', 'en-US')">🔊 Ouvir em Inglês</button>
+            <div class="card-header-flex">
+                <div class="card-title">Acolhimento Imediato / Segurança</div>
+            </div>
+            <div class="card-desc">"Você está segura(o). Permanecerei ao seu lado e prestarei todo o suporte necessário."</div>
+            <button class="audio-btn danger" onclick="speak('You are safe. Stay with me, I will help you with everything you need.', 'en-US')">🔊 Reproduzir em Inglês</button>
         </div>
 
         <div class="card emergency">
-            <div class="card-title">Acionar Autoridades</div>
-            <div class="card-desc">"Deseja que eu chame a polícia ou assistência médica?"</div>
-            <button class="audio-btn danger" onclick="speak('Do you want me to call the police or medical assistance?', 'en-US')">🔊 Ouvir em Inglês</button>
+            <div class="card-header-flex">
+                <div class="card-title">Suporte Médico / Autoridades</div>
+            </div>
+            <div class="card-desc">"Você necessita de atendimento médico ou prefere que acionemos as autoridades policiais?"</div>
+            <button class="audio-btn danger" onclick="speak('Do you need medical assistance or would you like me to call the police?', 'en-US')">🔊 Reproduzir em Inglês</button>
         </div>
 
-        <h2 style="margin-top: 20px;">🚆 Como Chegar ao Aeroporto de Guarulhos</h2>
-        <ul class="step-list">
-            <li class="step-item">
-                <div class="step-number">1</div>
-                <div><strong>Linha 4-Amarela:</strong> Embarque na Linha 4 e siga até a Estação <strong>Luz</strong>.</div>
-            </li>
-            <li class="step-item">
-                <div class="step-number">2</div>
-                <div><strong>Integração Luz:</strong> Siga as placas de sinalização para a <strong>Linha 13-Jade / Expresso Aeroporto</strong>.</div>
-            </li>
-            <li class="step-item">
-                <div class="step-number">3</div>
-                <div><strong>Expresso Aeroporto:</strong> Pegue o trem direto para a estação <strong>Aeroporto-Guarulhos</strong>.</div>
-            </li>
-            <li class="step-item">
-                <div class="step-number">4</div>
-                <div><strong>Shuttle:</strong> Utilize o ônibus gratuito da CPTM até o seu terminal de embarque.</div>
-            </li>
-        </ul>
+        <div class="section-title" style="margin-top: 24px;">🗺️ Rotas de Integração & Mobilidade</div>
+
+        <!-- ROTA 1: LINHA 1-AZUL & RODOVIÁRIA TIETÊ -->
+        <div class="route-card">
+            <div class="route-header">
+                <span class="line-badge bg-line-1">Linha 1-Azul</span>
+                <span class="route-destination">Linha 1-Azul & Rodoviária do Tietê</span>
+            </div>
+            <ul class="step-list">
+                <li class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Embarque na <strong>Linha 4-Amarela</strong> e siga até a estação <strong>Luz</strong>.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Na estação Luz, faça a integração gratuita para a <strong>Linha 1-Azul</strong>.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Para o **Terminal Rodoviário do Tietê**: siga no sentido *Tucuruvi* e desembarque na estação **Portuguesa-Tietê**.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ROTA 2: LINHA 2-VERDE -->
+        <div class="route-card">
+            <div class="route-header">
+                <span class="line-badge bg-line-2">Linha 2-Verde</span>
+                <span class="route-destination">Linha 2-Verde (Paulista / Vila Madalena)</span>
+            </div>
+            <ul class="step-list">
+                <li class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Embarque na <strong>Linha 4-Amarela</strong> e vá até a estação <strong>Paulista</strong>.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Siga a sinalização de integração pela túnel de conexão até a estação <strong>Consolação (Linha 2-Verde)</strong>.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ROTA 3: LINHA 3-VERMELHA & RODOVIÁRIA BARRA FUNDA -->
+        <div class="route-card">
+            <div class="route-header">
+                <span class="line-badge bg-line-3">Linha 3-Vermelha</span>
+                <span class="route-destination">Rodoviária da Barra Funda</span>
+            </div>
+            <ul class="step-list">
+                <li class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Embarque na <strong>Linha 4-Amarela</strong> e siga até a estação <strong>República</strong>.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Faça a integração para a <strong>Linha 3-Vermelha</strong> no sentido *Palmeiras-Barra Funda*.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Desembarque no final da linha: estação e **Terminal Rodoviário Palmeiras-Barra Funda**.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ROTA 4: AEROPORTO GUARULHOS -->
+        <div class="route-card">
+            <div class="route-header">
+                <span class="line-badge bg-line-13">CPTM / Expresso</span>
+                <span class="route-destination">Aeroporto Internacional de Guarulhos (GRU)</span>
+            </div>
+            <ul class="step-list">
+                <li class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Siga pela <strong>Linha 4-Amarela</strong> até a estação <strong>Luz</strong>.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Na Luz, acompanhe a sinalização para o **Expresso Aeroporto (Linha 13-Jade)**.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Ao desembarcar na estação **Aeroporto-Guarulhos**, utilize o ônibus gratuito (Shuttle) até o seu terminal (1, 2 ou 3).</div>
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <!-- SEÇÃO INGLÊS -->
+    <!-- ==================== SEÇÃO EM INGLÊS (PASSENGER / TURISTA) ==================== -->
     <div id="content-en" class="section">
-        <h2>🚨 Emergency & Immediate Support</h2>
+        <div class="section-title">🚨 Safety & Emergency Support</div>
         
         <div class="card emergency">
-            <div class="card-title">Reassurance</div>
-            <div class="card-desc">"You are safe. Stay with me, I can help you."</div>
-            <button class="audio-btn danger" onclick="speak('You are safe. Stay with me, I can help you.', 'en-US')">🔊 Play Audio</button>
+            <div class="card-header-flex">
+                <div class="card-title">Immediate Support</div>
+            </div>
+            <div class="card-desc">"You are safe. Stay with me, I will help you with everything you need."</div>
+            <button class="audio-btn danger" onclick="speak('You are safe. Stay with me, I will help you with everything you need.', 'en-US')">🔊 Play Audio</button>
         </div>
 
         <div class="card emergency">
-            <div class="card-title">Authorities & Assistance</div>
-            <div class="card-desc">"Do you want me to call the police or medical assistance?"</div>
-            <button class="audio-btn danger" onclick="speak('Do you want me to call the police or medical assistance?', 'en-US')">🔊 Play Audio</button>
+            <div class="card-header-flex">
+                <div class="card-title">Police / Medical Assistance</div>
+            </div>
+            <div class="card-desc">"Do you need medical assistance or would you like me to call the police?"</div>
+            <button class="audio-btn danger" onclick="speak('Do you need medical assistance or would you like me to call the police?', 'en-US')">🔊 Play Audio</button>
         </div>
 
-        <h2 style="margin-top: 20px;">🚆 Directions to Guarulhos Airport</h2>
-        <ul class="step-list">
-            <li class="step-item">
-                <div class="step-number">1</div>
-                <div><strong>Line 4-Yellow:</strong> Board Line 4-Yellow and travel to <strong>Luz Station</strong>.</div>
-            </li>
-            <li class="step-item">
-                <div class="step-number">2</div>
-                <div><strong>Transfer at Luz:</strong> Follow the signs for <strong>Line 13-Jade / Airport Express</strong>.</div>
-            </li>
-            <li class="step-item">
-                <div class="step-number">3</div>
-                <div><strong>Airport Express:</strong> Take the direct train to <strong>Aeroporto-Guarulhos Station</strong>.</div>
-            </li>
-            <li class="step-item">
-                <div class="step-number">4</div>
-                <div><strong>Terminal Shuttle:</strong> Take the free station shuttle bus to your terminal.</div>
-            </li>
-        </ul>
+        <div class="section-title" style="margin-top: 24px;">🗺️ Transit Connections & Directions</div>
+
+        <!-- ROUTE 1: LINE 1-BLUE & TIETÊ BUS STATION -->
+        <div class="route-card">
+            <div class="route-header">
+                <span class="line-badge bg-line-1">Line 1-Blue</span>
+                <span class="route-destination">Line 1-Blue & Tietê Bus Terminal</span>
+            </div>
+            <ul class="step-list">
+                <li class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Take **Line 4-Yellow** to **Luz Station**.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Transfer to **Line 1-Blue** (Free connection).</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">For **Tietê Bus Station**: Take the northbound train towards *Tucuruvi* and exit at **Portuguesa-Tietê Station**.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ROUTE 2: LINE 2-GREEN -->
+        <div class="route-card">
+            <div class="route-header">
+                <span class="line-badge bg-line-2">Line 2-Green</span>
+                <span class="route-destination">Line 2-Green (Paulista / Av. Paulista)</span>
+            </div>
+            <ul class="step-list">
+                <li class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Take **Line 4-Yellow** to **Paulista Station**.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Follow the connecting tunnel signs to **Consolação Station (Line 2-Green)**.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ROUTE 3: BARRA FUNDA BUS STATION -->
+        <div class="route-card">
+            <div class="route-header">
+                <span class="line-badge bg-line-3">Line 3-Red</span>
+                <span class="route-destination">Barra Funda Bus & Train Terminal</span>
+            </div>
+            <ul class="step-list">
+                <li class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Take **Line 4-Yellow** to **República Station**.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Transfer to **Line 3-Red** heading towards *Palmeiras-Barra Funda*.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Get off at the last station: **Palmeiras-Barra Funda Terminal**.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ROUTE 4: GUARULHOS AIRPORT -->
+        <div class="route-card">
+            <div class="route-header">
+                <span class="line-badge bg-line-13">Airport Express</span>
+                <span class="route-destination">Guarulhos International Airport (GRU)</span>
+            </div>
+            <ul class="step-list">
+                <li class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Take **Line 4-Yellow** to **Luz Station**.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Follow signs to the **Airport Express train (Line 13-Jade)**.</div>
+                </li>
+                <li class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Upon arriving at **Aeroporto-Guarulhos Station**, take the free shuttle bus to your Terminal (1, 2, or 3).</div>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <footer>
-        Projeto Corporativo • Atendimento Humanizado
+        <strong>Projeto Corporativo de Atendimento Humanizado</strong><br>
+        Facilidade de Mobilidade, Segurança e Acolhimento Multi-idioma.
     </footer>
 </div>
 
 <script>
-    // Troca de idioma
     function setLanguage(lang) {
         document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
@@ -330,23 +575,22 @@
         }
     }
 
-    // Reprodução de áudio via Síntese de Voz do Navegador
     function speak(text, lang) {
         if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel(); // Para áudios em andamento antes de iniciar um novo
+            window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
-            utterance.rate = 0.9;
+            utterance.rate = 0.88; // Ritmo cadenciado para facilitar compreensão
             window.speechSynthesis.speak(utterance);
         } else {
-            alert('Seu navegador não suporta a função de áudio.');
+            alert('Seu dispositivo não suporta reprodução direta de voz.');
         }
     }
 
-    // REGISTRO DO SERVICE WORKER (SUPORTE OFFLINE COMPLETO)
+    // REGISTRO DE SERVICE WORKER PARA ACESSO OFFLINE
     if ('serviceWorker' in navigator) {
         const swCode = `
-            const CACHE_NAME = 'apoio-mobilidade-v1';
+            const CACHE_NAME = 'atendimento-mobilidade-v2';
             
             self.addEventListener('install', (e) => {
                 e.waitUntil(
@@ -375,12 +619,8 @@
 
         window.addEventListener('load', () => {
             navigator.serviceWorker.register(swUrl)
-                .then(() => {
-                    console.log('Service Worker registrado com sucesso para uso offline.');
-                })
-                .catch((err) => {
-                    console.error('Erro ao registrar Service Worker:', err);
-                });
+                .then(() => console.log('Service Worker ativado: suporte offline pronto.'))
+                .catch((err) => console.error('Erro SW:', err));
         });
     }
 </script>
